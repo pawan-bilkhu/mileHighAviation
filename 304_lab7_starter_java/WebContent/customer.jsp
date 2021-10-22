@@ -5,13 +5,8 @@
     <!DOCTYPE html>
         <html>
             <link rel="stylesheet" href="https://unpkg.com/@clr/ui/clr-ui.min.css" />
-            <style type="text/css">table, th, td {
-                .right text-align: right;}
-                h2 {text-align: center;}
-                h3 {text-align: center;}
-                td {text-align: center;
-                    vertical-align: middle;}
-            </style>
+            <link rel="stylesheet" href="css/customer.css" />
+
         <head>
         <title>Customer Page</title>
         </head>
@@ -47,15 +42,15 @@ try{
 			pstmt.setString(1, user);
 			ResultSet rst = pstmt.executeQuery();
 
-			out.print("<div style=\"margin:0 auto;text-align:center;display:inline\">");
+			out.print("<div class=\"container1\">");
             out.print("<h1>Customer Profile<h1>");
-            out.print("<table class=\"table\" style=\"display:inline\">");
+            out.print("<table class=\"table table1\" >");
 			while(rst.next()){
 			    custid = rst.getString("customerId");
                 out.print("<tr><th colspan=\"4\">Credentials</th></tr>");
                 out.print("<tr><th>Customer Id</th><td>"+rst.getString("customerId")+"</td><th>User id</th><td>"+rst.getString("userid")+"</td></tr>");
 
-			    out.print("<tr><td colspan=\"4\"><table class=\"table\">");
+			    out.print("<tr><td colspan=\"4\"><table id=\"innerTable\" class=\"table\">");
 			    out.print("<tr><th colspan=\"2\">Personal Info</th><th colspan=\"2\">Shipping Info</th></tr>");
 				out.print("<tr><th>First Name</th><td>"+rst.getString("firstName")+"</td><th>Address</th><td>"+rst.getString("address")+"</td></tr>");
 				out.print("<tr><th>Last Name</th><td>"+rst.getString("lastName")+"</td><th>City</th><td>"+rst.getString("city")+"</td></tr>");
@@ -65,7 +60,7 @@ try{
 
 				out.print("</table></td></tr>");
 				out.print("</table></div>");
-				out.print("<div style=\"text-align:center\"><a href=\"changeCustomer.jsp?id=" + rst.getString("customerId")
+				out.print("<div id=\"container2\"><a href=\"changeCustomer.jsp?id=" + rst.getString("customerId")
 				+ "&fname=" + rst.getString("firstName") + "&lname=" + rst.getString("lastName")
 			    + "&email=" + rst.getString("email") + "&phoneNo=" + rst.getString("phonenum")
 			    + "&password=" + rst.getString("password") + "&address=" + rst.getString("address")
@@ -83,9 +78,9 @@ try{
 
             if(rst.next())
             {
-                out.print("<div style=\"margin:0 auto;text-align:center;display:inline\">");
+                out.print("<div class=\"container1\">");
                 out.print("<h1>Payment Info<h1>");
-                out.print("<table class=\"table\" style=\"display:inline\">");
+                out.print("<table class=\"table table1\">");
                 out.print("<tr><th>Type</th><th>Card Number</th><th>Expiry Date</th><th></th><tr>");
                 do{
                     out.print("<tr>");

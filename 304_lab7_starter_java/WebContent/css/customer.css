@@ -1,0 +1,26 @@
+.container1{
+    margin: 0 auto;
+    text-align: center;
+    display: inline;
+}
+#container2{
+    text-align: center;
+}
+.alignMiddle{
+    vertical-align: middle;
+}
+.table1{
+    display: inline;
+}
+table, th, td {
+    text-align: right;
+}
+h2 {
+    text-align: center;
+}
+h3 {
+    text-align: center;
+}
+td {
+    vertical-align: middle;
+}
