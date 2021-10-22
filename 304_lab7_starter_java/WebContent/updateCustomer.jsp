@@ -13,33 +13,36 @@
     String pcode = request.getParameter("postalCode");
     String country = request.getParameter("country");
 
-        try{
-            getConnection();
-            String updateSQL = "UPDATE customer SET firstName = ?, lastName = ?, email = ?, phonenum = ?, password = ?, address = ?, city = ?, state = ?, postalCode = ?, country = ? WHERE customerId = ?";
-            PreparedStatement pstmt = con.prepareStatement(updateSQL);
-            pstmt = con.prepareStatement(updateSQL);
+        try
+        {
+                getConnection();
+                String updateSQL = "UPDATE customer SET firstName = ?, lastName = ?, email = ?, phonenum = ?, password = ?, address = ?, city = ?, state = ?, postalCode = ?, country = ? WHERE customerId = ?";
+                PreparedStatement pstmt = con.prepareStatement(updateSQL);
+                pstmt = con.prepareStatement(updateSQL);
 
-            pstmt.setString(1, fname);
-            pstmt.setString(2, lname);
-            pstmt.setString(3, email);
-            pstmt.setString(4, phoneNo);
-            pstmt.setString(5, password);
-            pstmt.setString(6,address);
-            pstmt.setString(7,city);
-            pstmt.setString(8, state);
-            pstmt.setString(9, pcode);
-            pstmt.setString(10, country);
-            pstmt.setString(11, custid);
-            pstmt.executeUpdate();
+                pstmt.setString(1, fname);
+                pstmt.setString(2, lname);
+                pstmt.setString(3, email);
+                pstmt.setString(4, phoneNo);
+                pstmt.setString(5, password);
+                pstmt.setString(6,address);
+                pstmt.setString(7,city);
+                pstmt.setString(8, state);
+                pstmt.setString(9, pcode);
+                pstmt.setString(10, country);
+                pstmt.setString(11, custid);
+                pstmt.executeUpdate();
 
 
-            // Close connection
-            pstmt.close();
-            response.sendRedirect("customer.jsp");
+                // Close connection
+                pstmt.close();
+                response.sendRedirect("customer.jsp");
 
         }
-        catch(SQLException ex)
-{System.out.println(ex);}
+                catch(SQLException ex)
+        {
+                System.out.println(ex);
+        }
         %>
 
         </html>

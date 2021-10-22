@@ -24,29 +24,31 @@
 <%@ include file="userHeaderNav.jsp" %>
                 </header>
                         <%
-        out.println("<div id=\"table1\">");
-if(user!= null && user.equalsIgnoreCase("admin")){
-    //NumberFormat currFormat = NumberFormat.getCurrencyInstance();
-    NumberFormat currFormat = NumberFormat.getCurrencyInstance(Locale.US);
-    try ( Connection con = DriverManager.getConnection(url, uid, pw);)
+    out.println("<div id=\"container1\">");
+    if(user!= null && user.equalsIgnoreCase("admin"))
     {
-        out.println("<h1> Administrator Sales Report by Day</h1>");
-        String SQL = "SELECT FORMAT(orderDate, 'yyyy-MM-dd'), SUM(totalAmount) FROM ordersummary GROUP BY FORMAT(orderDate, 'yyyy-MM-dd') ";
-        PreparedStatement pstmt= con.prepareStatement(SQL);
-        ResultSet rst = pstmt.executeQuery();
-        out.print("<table class=\"table\"><tr><th>Order Date</th><th>Total Order Amount </th></tr>");
+        //NumberFormat currFormat = NumberFormat.getCurrencyInstance();
+        NumberFormat currFormat = NumberFormat.getCurrencyInstance(Locale.US);
+        try ( Connection con = DriverManager.getConnection(url, uid, pw);)
+        {
+            out.println("<h1> Administrator Sales Report by Day</h1>");
+            String SQL = "SELECT FORMAT(orderDate, 'yyyy-MM-dd'), SUM(totalAmount) FROM ordersummary GROUP BY FORMAT(orderDate, 'yyyy-MM-dd') ";
+            PreparedStatement pstmt= con.prepareStatement(SQL);
+            ResultSet rst = pstmt.executeQuery();
+            out.print("<table class=\"table\"><tr><th>Order Date</th><th>Total Order Amount </th></tr>");
 
-        while(rst.next()){
+            while(rst.next()){
                 out.print("<tr><td>"+rst.getString(1)+"</td> ");
                 out.print("<td>"+currFormat.format(rst.getDouble(2))+"</td></tr>");
+            }
+            rst.close();
+            pstmt.close();
         }
-        rst.close();
-        pstmt.close();
     }
-}
-else{
-    out.println("<h1> Unauthorized User!</h1>");
-}
+    else
+    {
+        out.println("<h1> Unauthorized User!</h1>");
+    }
 %>
 
                 </table>

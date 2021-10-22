@@ -20,11 +20,13 @@
                 </div>
 
 <%          out.println("<div class=\"header-actions\">");
-            if( user != null){
+            if( user != null)
+            {
                 out.println("<a class=\"nav-link nav-text\"><span class=\"nav-text\"> Logged in as: " + user + "</span></a>");
                 out.println("<a href=\"logout.jsp\" class=\"nav-link nav-text\"><span class=\"nav-text\">Logout</span></a>");
             }
-            else{
+            else
+            {
                 String message = "You must sign in to view customer info";
                 session.setAttribute("loginMessage", message);
             }
@@ -33,12 +35,12 @@
             </header>
 
  <%
-try{
+        try{
             getConnection();
 
 			String SQL = "SELECT  * FROM customer WHERE userid = ? ";
 			String custid = null;
-			PreparedStatement pstmt= con.prepareStatement(SQL);
+			PreparedStatement pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1, user);
 			ResultSet rst = pstmt.executeQuery();
 
@@ -60,13 +62,7 @@ try{
 
 				out.print("</table></td></tr>");
 				out.print("</table></div>");
-				out.print("<div id=\"container2\"><a href=\"changeCustomer.jsp?id=" + rst.getString("customerId")
-				+ "&fname=" + rst.getString("firstName") + "&lname=" + rst.getString("lastName")
-			    + "&email=" + rst.getString("email") + "&phoneNo=" + rst.getString("phonenum")
-			    + "&password=" + rst.getString("password") + "&address=" + rst.getString("address")
-			    + "&city=" + rst.getString("city") + "&state=" + rst.getString("state")
-			    + "&postalCode=" + rst.getString("postalCode") + "&country=" + rst.getString("country")
-			    + "\" class=\"btn btn-primary\">Change Customer Info</a></div>");
+				out.print("<div id=\"container2\"><a href=\"changeCustomer.jsp?id=" + rst.getString("customerId") + "\" class=\"btn btn-primary\">Change Customer Info</a></div>");
 			}
 
 
@@ -103,7 +99,8 @@ try{
 			pstmt.close();
 	}
 
-	catch(SQLException e ){
+	catch(SQLException e )
+	{
 		out.println(e);
 	}
 %>
