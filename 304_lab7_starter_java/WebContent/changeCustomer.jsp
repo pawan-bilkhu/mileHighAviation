@@ -24,8 +24,27 @@
 
 <%
 String custid = request.getParameter("id");
-if(custid != null && user != null)
+boolean userMatch = false;
+try
 {
+        getConnection();
+        String SQL = "SELECT userid FROM customer WHERE customerId = ? ";
+		PreparedStatement pstmt = con.prepareStatement(SQL);
+        pstmt.setString(1, custid);
+        ResultSet rst = pstmt.executeQuery();
+        while(rst.next())
+        {
+                if(rst.getString("userid").equals(user))
+                        userMatch = true;
+        }
+}
+catch(SQLException e)
+{
+        out.println(e);
+}
+if(custid != null && user != null && userMatch)
+{
+        out.print(user);
         try
         {
                 getConnection();
@@ -119,9 +138,18 @@ if(custid != null && user != null)
 
 }
 else
-{
-        out.print("<h1>Unauthorized Access. Please login to view this page.<h1>");
-        out.print("<a href=\"login.jsp\">Go to Login</a>");
+{       String accessMessage = "<h1>Unauthorized Access.";
+        String loginMessage = "";
+        out.print("<h1>");
+        if(user == null || custid == null)
+        {
+               accessMessage = accessMessage + " Please login to view this page.";
+               loginMessage = "<h3><a href=\"login.jsp\">Go to Login</a></h3>";
+        }
+        accessMessage = accessMessage + "</h1>";
+        out.print(accessMessage);
+        out.print(loginMessage);
+        out.print("<h3><a href=\"index.jsp\">Home</a></h3>");
 }
 %>
         </div>
