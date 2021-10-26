@@ -16,7 +16,7 @@
         try
         {
                 getConnection();
-                String updateSQL = "UPDATE customer SET firstName = ?, lastName = ?, email = ?, phonenum = ?, password = ?, address = ?, city = ?, state = ?, postalCode = ?, country = ? WHERE customerId = ?";
+                String updateSQL = "UPDATE customer SET firstName = ?, lastName = ?, email = ?, phonenum = ?, password = ? WHERE customerId = ?";
                 PreparedStatement pstmt = con.prepareStatement(updateSQL);
                 pstmt = con.prepareStatement(updateSQL);
 
@@ -25,12 +25,7 @@
                 pstmt.setString(3, email);
                 pstmt.setString(4, phoneNo);
                 pstmt.setString(5, password);
-                pstmt.setString(6,address);
-                pstmt.setString(7,city);
-                pstmt.setString(8, state);
-                pstmt.setString(9, pcode);
-                pstmt.setString(10, country);
-                pstmt.setString(11, custid);
+                pstmt.setString(6, custid);
                 pstmt.executeUpdate();
 
 
