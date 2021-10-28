@@ -2,7 +2,7 @@
 <%@ include file="jdbc.jsp" %>
             <%
 String custid = request.getParameter("customerId");
-String pass = request.getParameter("password");
+String direction = request.getParameter("direction");
 String payType = request.getParameter("payType");
 String payNum = request.getParameter("payNum");
 String expDate = request.getParameter("expDate");
@@ -19,10 +19,10 @@ try
     pstmt.executeUpdate();
     pstmt.close();
 
-    if(pass.equals("null") || pass.length() == 0)
+    if(direction.equals("null"))
          response.sendRedirect("customer.jsp");
     else
-        out.println("<meta http-equiv=\"refresh\" content=\"0; URL=paymentMethod.jsp?customerId=" + custid + "&password=" +pass+ "&submit=Log+In\">");
+         response.sendRedirect("paymentMethod.jsp?customerId=" + custid);
 
 }
 catch(SQLException ex)

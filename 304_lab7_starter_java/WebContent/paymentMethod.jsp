@@ -1,5 +1,4 @@
 <%@ page import="java.text.NumberFormat" %>
-<%@ include file="auth.jsp"%>
 <%@ include file="jdbc.jsp" %>
 <%@ include file= "sessionAttribute.jsp" %>
 <%@ include file="getAuthenticatedUser.jsp" %>
@@ -7,14 +6,8 @@
     <html>
     <head>
         <link rel="stylesheet" href="https://unpkg.com/@clr/ui/clr-ui.min.css" />
-        <style type="text/css">table, th, td {
-            .right text-align: right;}
-            h2 {text-align: center;}
-            h3 {text-align: center;}
-            td {text-align: center;
-            vertical-align: middle;}
-        </style>
-        <title>Create Payment Method</title>
+        <link rel="stylesheet" href="css/paymentMethod.css" />
+        <title>Payment Method</title>
     </head>
     <body>
         <div class="main-container">
@@ -56,6 +49,7 @@ if(user != null)
     }
 }
 
+
 if(validUser)
 {
     out.println("<div style=\"margin:0 auto;text-align:center;display:inline\">");
@@ -80,14 +74,14 @@ if(validUser)
                 out.println("<td><a href=\"shippingMethod.jsp?customerId=" + custid + "&payType=" +rst.getString(1)+ "&payNum=" +rst.getString(2)+ "\" class=\"btn btn-success-outline btn-sm\">Select</a></td>");
                 out.println("</tr>");
             }while(rst.next());
-            out.print("<tr><td colspan=\"4\"><a href=\"showcart.jsp\" class=\"btn btn-primary\">Return to cart</a><a href=\"newPayment.jsp?customerId=" + custid + "\" class=\"btn btn-primary\">Add new payment method</a></td></tr>");
+            out.print("<tr><td colspan=\"4\"><a href=\"showcart.jsp\" class=\"btn btn-primary\">Return to cart</a><a href=\"newPayment.jsp?customerId=" + custid + "&direction=paymentMethod\" class=\"btn btn-primary\">Add new payment method</a></td></tr>");
             out.println("</table>");
             out.println("</div><br>");
         }
         else
         {
             out.println("<h1>You have no Payment methods<h1>");
-            out.print("<div style=\"text-align:center\"><span><a href=\"showcart.jsp\" class=\"btn btn-primary\">Return to cart</a></span><span><a href=\"newPayment.jsp?customerId=" + custid + "\" class=\"btn btn-primary\">Add new payment method</a></span></div>");
+            out.print("<div class=\"center\"><span><a href=\"showcart.jsp\" class=\"btn btn-primary\">Return to cart</a></span><span><a href=\"newPayment.jsp?customerId=" + custid + "&direction=paymentMethod\" class=\"btn btn-primary\">Add new payment method</a></span></div>");
         }
 
         pstmt.close();
@@ -100,7 +94,7 @@ if(validUser)
 }
 else
 {
-    String message = "Denied Access";
+    String message = "Access Denied";
     session.setAttribute("loginMessage", message);
 	response.sendRedirect("login.jsp");
 }

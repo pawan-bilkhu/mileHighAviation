@@ -1,5 +1,7 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ include file="jdbc.jsp" %>
+<%@ include file= "sessionAttribute.jsp" %>
+<%@ include file="getAuthenticatedUser.jsp" %>
 <!DOCTYPE html>
     <html>
         <head>
@@ -18,11 +20,16 @@
 <%
 String custid = request.getParameter("customerId");
 String direction = request.getParameter("direction");
+String payType = request.getParameter("payType");
+String payNum = request.getParameter("payNum");
 
 out.print("<div id=\"container1\">");
 out.print("<h1>Change Shipping Address</h1>");
 out.print("<form method=\"post\" action=\"updateShippingAddress.jsp?\">");
 out.print("<input type=\"hidden\" name=\"customerId\" value=\"" + custid + "\">");
+out.print("<input type=\"hidden\" name=\"direction\" value=\"" + direction + "\">");
+out.print("<input type=\"hidden\" name=\"payType\" value=\"" + payType + "\">");
+out.print("<input type=\"hidden\" name=\"payNum\" value=\"" + payNum + "\">");
 
 out.print("<table class=\"table-compact\">");
 

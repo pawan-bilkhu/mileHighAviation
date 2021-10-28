@@ -12,8 +12,22 @@
 	if(authenticatedUser != null)
 		if(!request.getParameter("productId").equals("null"))
 			response.sendRedirect("newReview.jsp?id=" + request.getParameter("productId") + "&name=" + request.getParameter("productName"));
-		else
-			response.sendRedirect("index.jsp");
+		else if(!request.getParameter("direction").equals("null"))
+		{
+			if(request.getParameter("direction").equals("checkout"))
+			{
+			    response.sendRedirect("checkout.jsp");
+			}
+			else if(request.getParameter("direction").equals("customerInfo"))
+			{
+			    response.sendRedirect("customer.jsp");
+			}
+
+	    }
+	    else
+	    {
+	            response.sendRedirect("index.jsp");
+	    }
 	else
 		response.sendRedirect("login.jsp");		// Failed login - redirect back to login page with a message
 %>

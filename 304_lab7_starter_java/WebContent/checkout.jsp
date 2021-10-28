@@ -1,4 +1,3 @@
-<%@ include file="auth.jsp"%>
 <%@ include file="jdbc.jsp" %>
 <%@ include file= "sessionAttribute.jsp" %>
 <%@ include file="getAuthenticatedUser.jsp" %>
@@ -38,6 +37,12 @@
                         {
                                 System.out.println(ex);
                         }
+                }
+                else
+                {
+                        String message = "Please sign in to continue";
+                        session.setAttribute("loginMessage", message);
+                        response.sendRedirect("login.jsp?direction=checkout");
                 }
 
         %>

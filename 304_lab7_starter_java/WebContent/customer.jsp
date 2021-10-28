@@ -1,4 +1,3 @@
-<%@ include file="auth.jsp"%>
 <%@ page import="java.text.NumberFormat" %>
 <%@ include file="jdbc.jsp" %>
 <%@ include file="getAuthenticatedUser.jsp" %>
@@ -27,8 +26,9 @@
             }
             else
             {
-                String message = "You must sign in to view customer info";
+                String message = "Please sign in to view customer info";
                 session.setAttribute("loginMessage", message);
+                response.sendRedirect("login.jsp?direction=customerInfo");
             }
             out.println("</div>");
 %>
