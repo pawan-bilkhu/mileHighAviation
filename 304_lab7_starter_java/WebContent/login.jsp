@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<link rel="stylesheet" href="https://unpkg.com/@clr/ui/clr-ui.min.css" />
+	<link rel="stylesheet" href="css/login.css" />
 <head>
 
 <title>Login</title>
@@ -26,8 +27,10 @@
 		<%
 		out.println("<input type=\"hidden\" name=\"productId\" value=\"" + request.getParameter("id") + "\">");
 		out.println("<input type=\"hidden\" name=\"productName\" value=\"" + request.getParameter("name") + "\">");
+		out.println("<input type=\"hidden\" name=\"direction\" value=\"" + request.getParameter("direction") + "\">");
 		%>
-		<table class="table" style="display:inline">
+	<h1>
+		<table class="table tableInline">
 			<tr>
 				<th><font face="Arial, Helvetica, sans-serif" size="2">Username:</font></th>
 				<th><input type="text" name="username"  size="30" maxlength="10"></th>
@@ -41,10 +44,10 @@
 					<input class="btn btn-warning" type="reset" value="Reset">
 					<input class="btn btn-success" type="submit" name="Submit2" value="Log In">
 					<span><a href="newCustomer.jsp">Create an Account</a></span>
-			</td>
-
+				</td>
 			</tr>
 		</table>
+	</h1>
 	<div>
 
 	</div>

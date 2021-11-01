@@ -1,5 +1,7 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ include file="jdbc.jsp" %>
+<%@ include file= "sessionAttribute.jsp" %>
+<%@ include file="getAuthenticatedUser.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +18,6 @@
     <body>
     <%
         String custid = request.getParameter("customerId");
-        String pass = request.getParameter("password");
         String payType = request.getParameter("payType");
         String payNum = request.getParameter("payNum");
         String address = request.getParameter("address");
@@ -24,6 +25,7 @@
         String state = request.getParameter("state");
         String postalCode = request.getParameter("postalCode");
         String country = request.getParameter("country");
+        String direction = request.getParameter("direction");
 
     try{
         getConnection();
@@ -38,7 +40,14 @@
         pstmt.executeUpdate();
         pstmt.close();
 
-        out.println("<meta http-equiv=\"refresh\" content=\"0;URL=shippingMethod.jsp?customerId=" + custid + "&password=" +pass+ "&payType=" +payType+ "&payNum=" +payNum+"\">");
+        if(direction.equals("customerInfo")){
+            response.sendRedirect("customer.jsp?id=" + custid);
+        }
+        else if(direction.equals("shippingMethod"))
+        {
+            response.sendRedirect("shippingMethod.jsp?customerId=" + custid + "&payType=" + payType + "&payNum=" + payNum);
+        }
+
 
     }catch(SQLException ex)
     {System.out.println(ex);}

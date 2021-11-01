@@ -48,13 +48,11 @@
     <div style="margin:0 auto;text-align:center;display:inline">
 
     <%@ include file="sessionAttribute.jsp" %>
-    <% String custid = request.getParameter("customerId"); %>
-    <% String pass = request.getParameter("password"); %>
 
     <h1>Add Payment Method</h1>
         <form method="get" action="registerPaymentMethod.jsp?">
-        <% out.println("<input type=\"hidden\" name=\"customerId\" value=\"" + custid + "\">"); %>
-        <% out.println("<input type=\"hidden\" name=\"password\" value=\"" + pass + "\">"); %>
+        <% out.println("<input type=\"hidden\" name=\"customerId\" value=\"" + request.getParameter("customerId") + "\">"); %>
+        <% out.println("<input type=\"hidden\" name=\"direction\" value=\"" + request.getParameter("direction") + "\">"); %>
             <table class="table-compact" style="display:inline">
                 <tr>
                     <th colspan=3><h3>Payment Info</h3></th>

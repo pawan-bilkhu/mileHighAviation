@@ -1,3 +1,6 @@
+<%@ include file="jdbc.jsp" %>
+<%@ include file= "sessionAttribute.jsp" %>
+<%@ include file="getAuthenticatedUser.jsp" %>
 <!DOCTYPE html>
         <html>
         <head>
@@ -12,10 +15,37 @@
                         <a href="showcart.jsp" class="nav-link nav-text">Cart</a>
                 </div>
         </header>
-        <div id="container1"><h1>Log in to complete the transaction:</h1>
 
-<%@ include file= "sessionAttribute.jsp" %>
-        </div>
+        <%
+                if(user != null)
+                {
+                        try
+                        {
+                                getConnection();
+                                String SQL = "SELECT customerId FROM customer WHERE userid = ? ";
+			                    String custid = null;
+			                    PreparedStatement pstmt = con.prepareStatement(SQL);
+			                    pstmt.setString(1, user);
+			                    ResultSet rst = pstmt.executeQuery();
+                                while(rst.next())
+                                {
+                                        custid = rst.getString("customerId");
+                                }
+                                response.sendRedirect("paymentMethod.jsp?customerId=" + custid);
+                        }
+                        catch(SQLException ex)
+                        {
+                                System.out.println(ex);
+                        }
+                }
+                else
+                {
+                        String message = "Please sign in to continue";
+                        session.setAttribute("loginMessage", message);
+                        response.sendRedirect("login.jsp?direction=checkout");
+                }
+
+        %>
         <div id="container2">
                 <form name="MyForm" method="get" action="paymentMethod.jsp">
                         <table class="table" style="display:inline">
