@@ -55,36 +55,27 @@ HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Obje
 // Make connection
 
 boolean validUser = false;
-if(user != null)
-{
-    try
-    {
+if(user != null) {
+    try {
          getConnection();
          String SQL = "SELECT userid FROM customer WHERE customerId = ? ";
          PreparedStatement pstmt = con.prepareStatement(SQL);
          pstmt.setString(1, custid);
          ResultSet rst = pstmt.executeQuery();
-         while(rst.next())
-         {
-            if(rst.getString("userid").equals(user))
-            {
+         while(rst.next()) {
+            if(rst.getString("userid").equals(user)) {
                 validUser = true;
             }
-
          }
          pstmt.close();
          rst.close();
-    }
-    catch(SQLException ex)
-    {
+    } catch(SQLException ex) {
         System.out.println(ex);
     }
 }
 
-if(validUser)
-{
-    try
-    {
+if(validUser) {
+    try {
         getConnection();
 	    double sum = 0;
 		String SQL = "SELECT firstName, lastName, address, city, state, postalCode, country FROM customer WHERE customerId = ?";
@@ -94,8 +85,7 @@ if(validUser)
 		pstmt.setString(1, custid);
 		rst = pstmt.executeQuery();
 
-		while(rst.next())
-		{
+		while(rst.next()) {
 		        custName = rst.getString(1) + " " + rst.getString(2);
 		        address = rst.getString(3);
 		        city = rst.getString(4);
@@ -105,21 +95,17 @@ if(validUser)
 		        fullAddress =  address + ", " + city + ", " + state + ", " + postalCode + ", " + country;
 
 		}
-	}
-    catch(SQLException ex)
-	{
+	} catch(SQLException ex) {
 	    System.out.println(ex);
 	}
-		if(!productList.isEmpty())
-		{
+		if(!productList.isEmpty()) {
 			NumberFormat currFormat = NumberFormat.getCurrencyInstance(Locale.US);
 
 			out.println("<table class=table><th colspan=\"6\"><h1>You Order Summary</h1></th>");
 			out.println("<tr><th>Product ID</th><th>Product Name</th><th>Quantity</th><th>Price</th><th>Subtotal</th></tr>");
 			Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
             double sum = 0;
-				while (iterator.hasNext())
-				{
+				while (iterator.hasNext()) {
 					Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 					ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
 					String productId = (String) product.get(0);
@@ -146,8 +132,7 @@ if(validUser)
 				LocalDateTime now = LocalDateTime.now();
 				String orderDate = dtf.format(now);
 
-                try
-                {
+                try {
                 getConnection();
 				        //finally adding all information into ordersummary
 				        String insert = "INSERT INTO ordersummary (orderDate, customerId, totalAmount, shiptoAddress, shiptoCity, shiptoState, shiptoPostalCode, shiptoCountry) VALUES (?,?,?,?,?,?,?,?) ";
@@ -164,22 +149,18 @@ if(validUser)
 				        ResultSet keys = pstmt.getGeneratedKeys();
 				        keys.next();
 				        orderId = keys.getInt(1);
-				}
-				catch(SQLException ex)
-	            {
+				} catch(SQLException ex) {
 	                    System.out.println(ex);
 	            }
 
-				try
-				{
+				try {
 				        getConnection();
 				        //insert into orderproduct table
 				        String insert2 = "INSERT INTO orderproduct (orderId, productId, quantity, price) VALUES (?,?,?,?)";
 				        PreparedStatement pstmt = con.prepareStatement(insert2);
 				        pstmt.setInt(1, orderId);
 				        Iterator<Map.Entry<String, ArrayList<Object>>> iterator2 = productList.entrySet().iterator(); //traverse productlist again
-				        while (iterator2.hasNext())
-				        {
+				        while (iterator2.hasNext()) {
 					            Map.Entry<String, ArrayList<Object>> entry = iterator2.next();
 					            ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
 					            String productId = (String)product.get(0);
@@ -192,9 +173,7 @@ if(validUser)
 					            pstmt.setDouble(4, pr);
 					            int rowcount2 = pstmt.executeUpdate();
 				        }
-				}
-				catch(SQLException ex)
-	            {
+				} catch(SQLException ex) {
 	                    System.out.println(ex);
 	            }
 
@@ -207,15 +186,12 @@ if(validUser)
 				out.println("<a href=\"index.jsp\" class=\"btn btn-primary\">Home page</a></span></div>");
 
 				productList.clear();
-		}
-		else
-		{
+		} else {
 			out.println("<h2>You have an empty cart!</h2>");
 			out.println("<h3><a href=listprod.jsp class=\"btn btn-primary\">Return to Shop</a></h3>");
 		}
     }
-	else
-	{
+	else {
         String message = "Incorrect Customer ID and/or Password";
         session.setAttribute("loginMessage", message);
 		response.sendRedirect("checkout.jsp");

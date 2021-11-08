@@ -17,16 +17,36 @@
     </header>
     <body>
     <%
-        String custid = request.getParameter("customerId");
-        String payType = request.getParameter("payType");
-        String payNum = request.getParameter("payNum");
-        String address = request.getParameter("address");
-        String city = request.getParameter("city");
-        String state = request.getParameter("state");
-        String postalCode = request.getParameter("postalCode");
-        String country = request.getParameter("country");
-        String direction = request.getParameter("direction");
+String custid = request.getParameter("customerId");
+String payType = request.getParameter("payType");
+String payNum = request.getParameter("payNum");
+String address = request.getParameter("address");
+String city = request.getParameter("city");
+String state = request.getParameter("state");
+String postalCode = request.getParameter("postalCode");
+String country = request.getParameter("country");
+String direction = request.getParameter("direction");
 
+boolean validUser = false;
+if(user != null) {
+    try {
+         getConnection();
+         String SQL = "SELECT userid FROM customer WHERE customerId = ? ";
+         PreparedStatement pstmt = con.prepareStatement(SQL);
+         pstmt.setString(1, custid);
+         ResultSet rst = pstmt.executeQuery();
+         while(rst.next()) {
+            if(rst.getString("userid").equals(user)) {
+                validUser = true;
+            }
+         }
+         pstmt.close();
+         rst.close();
+    } catch(SQLException ex) {
+        System.out.println(ex);
+    }
+}
+if(validUser) {
     try{
         getConnection();
         String updateSQL = "UPDATE customer SET address = ?, city = ?, state = ?, postalCode = ?, country = ? WHERE customerId = ?";
@@ -43,14 +63,24 @@
         if(direction.equals("customerInfo")){
             response.sendRedirect("customer.jsp?id=" + custid);
         }
-        else if(direction.equals("shippingMethod"))
-        {
+        else if(direction.equals("shippingMethod")) {
             response.sendRedirect("shippingMethod.jsp?customerId=" + custid + "&payType=" + payType + "&payNum=" + payNum);
         }
-
-
-    }catch(SQLException ex)
-    {System.out.println(ex);}
+    } catch(SQLException ex) {
+        System.out.println(ex);
+    }
+}
+else
+{
+    String message = "Access Denied. Please login to view that page";
+    session.setAttribute("loginMessage", message);
+    if(direction.equals("shippingMethod")){
+        response.sendRedirect("checkout.jsp");
+    }
+    else if (direction.equals("customerInfo")){
+        response.sendRedirect("login.jsp?direction=customerInfo");
+    }
+}
 
     %>
 

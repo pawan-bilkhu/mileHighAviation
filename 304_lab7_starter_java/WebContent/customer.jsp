@@ -19,13 +19,11 @@
                 </div>
 
 <%          out.println("<div class=\"header-actions\">");
-            if( user != null)
-            {
+            if( user != null) {
                 out.println("<a class=\"nav-link nav-text\"><span class=\"nav-text\"> Logged in as: " + user + "</span></a>");
                 out.println("<a href=\"logout.jsp\" class=\"nav-link nav-text\"><span class=\"nav-text\">Logout</span></a>");
             }
-            else
-            {
+            else {
                 String message = "Please sign in to view customer info";
                 session.setAttribute("loginMessage", message);
                 response.sendRedirect("login.jsp?direction=customerInfo");
@@ -81,7 +79,7 @@
 				out.print("</tr>");
 
 				out.print("<tr>");
-				out.print("<td colspan=\"2\"><a href=\"changeCustomer.jsp?id=" + rst.getString("customerId") + "\" class=\"btn btn-primary\">Change Customer Info</a></td><td colspan=\"2\"><a href=\"changeCustomer.jsp?id=" + rst.getString("customerId") + "\" class=\"btn btn-primary\">Change Shipping Info</a></td>");
+				out.print("<td colspan=\"2\"><a href=\"changeCustomer.jsp?id=" + rst.getString("customerId") + "\" class=\"btn btn-primary\">Change Customer Info</a></td><td colspan=\"2\"><a href=\"changeShippingAddress.jsp?customerId=" + rst.getString("customerId") + "&direction=customerInfo\" class=\"btn btn-primary\">Change Shipping Info</a></td>");
 				out.print("</tr>");
 
 				out.print("</table></h1></div>");
