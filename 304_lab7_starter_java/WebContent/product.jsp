@@ -106,19 +106,25 @@ try
         out.print("<div style=\"margin:0 auto;text-align:center;display:inline\">");
 
 
-        out.println("<span class=\"title\"><h1>" + rst.getString(2) +" - " + currFormat.format(rst.getDouble(4)) +  "</h1></span>");
+        out.println("<h1>" + rst.getString(2) +" - " + currFormat.format(rst.getDouble(4)) +  "</h1>");
 
         // Testing purposes:
         // System.out.println(rst.getString(2) + " url: "+ rst.getString(5));
 
         // TODO: If there is a productImageURL, display using IMG tag
 
-        out.println("<table class=\"table table\">");
-        out.println("<tr>");
-        if(rst.getString(5) != null)
-            out.println("<td rowspan=\"3\"><img src=\"" + rst.getString(5) +"\"></td>");
-        out.println("<td><table class=\"table table\"><th>Description</th><tr><span class=\"fa fa-star " +a+ "checked\"></span><span class=\"fa fa-star " +b+ "checked\"></span><span class=\"fa fa-star " +c+ "checked\"></span><span class=\"fa fa-star " +d+ "checked\"></span><span class=\"fa fa-star " +e+ "checked\"></span></td></tr><tr><td style=\"text-align:left\">" + rst.getString(3) + "</td></tr></table>");
-        out.println("</tr></table>");
+        out.println("<table class=\"table\">");
+        out.println("<tr><td style=\"vertical-align:middle\"><figure>");
+        if(rst.getString(5) != null){
+            out.println("<img style=\"border: 10px solid black; float:none; margin:1em;\" src=\"" + rst.getString(5) +"\">");
+        } else {
+            out.println("<img alt=\"No image available\" style=\"float:none; margin:1em; \"src=\"" + rst.getString(5) +"\">");
+        }
+        out.println("<figcaption><span class=\"fa fa-star " +a+ "checked\"></span><span class=\"fa fa-star " +b+ "checked\"></span><span class=\"fa fa-star " +c+ "checked\"></span><span class=\"fa fa-star " +d+ "checked\"></span><span class=\"fa fa-star " +e+ "checked\"></span></td></figcaption>");
+        out.println("<figure></td>");
+        out.println("<td><table class=\"table\"><th>Description</th></tr>");
+        out.println("<tr><td style=\"text-align:left\">" + rst.getString(3) + "</td></tr>");
+        out.println("</table></td></table>");
         out.println("</div>");
         // TODO: Add links to Add to Cart and Continue Shopping
         out.println("<div style=\"text-align:center\">");
@@ -153,7 +159,7 @@ try
                 }
 
 
-            }while(rst1.next());
+            } while(rst1.next());
             out.print("</tr></table>");
         }
         else
