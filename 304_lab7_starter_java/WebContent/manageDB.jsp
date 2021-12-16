@@ -30,7 +30,7 @@
         out.println("<p>"+session.getAttribute("InvalidDelete").toString()+"</p>");
         session.setAttribute("InvalidDelete", null);
     }
-if(user== null || !user.equalsIgnoreCase("admin")){
+    if(user== null || !user.equalsIgnoreCase("admin")){
         response.sendRedirect("login.jsp");
     }
 %>
@@ -43,7 +43,7 @@ if(user== null || !user.equalsIgnoreCase("admin")){
             <table class="table-compact" style="display:inline">
                 <tr>
                     <td><font face="Arial, Helvetica, sans-serif" size="2">Product Name:</font></td>
-                    <td><input id="productname" type="text" name="productname"  size="50" maxlength="500" class="clr-input" placeholder="AASI Jetcruzer, ATR ATR-72, etc . . ." required></td>
+                    <td><input id="productname" type="text" name="productname" size="50" maxlength="500" class="clr-input" placeholder="AASI Jetcruzer, ATR ATR-72, etc . . ." required></td>
                 </tr>
                 <tr>
                     <td><font face="Arial, Helvetica, sans-serif" size="2" >Product Price:</font></td>

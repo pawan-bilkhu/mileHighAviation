@@ -41,44 +41,44 @@
     </header>
     <div class="content-container">
         <div class="content-area">
-        <div style="text-align:center">
-            <h1><span class="title">Search for the Aircrafts you want to buy or filter by Category:</span></h1>
-        </div>
-        <div style="text-align:center">
-            <form class="search" method="get" action="listprod.jsp">
-                <select name="category" id="category">
-                    <option value="">All</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Austria">Austria</option>
-                    <option value="Brazil">Brazil</option>
-                    <option value="Canada">Canada</option>
-                    <option value="China">China</option>
-                    <option value="Czech Republic">Czech Republic</option>
-                    <option value="European consortium">European consortium</option>
-                    <option value="France">France</option>
-                    <option value="Germany">Germany</option>
-                    <option value="India">India</option>
-                    <option value="Israel">Israel</option>
-                    <option value="Italy">Italy</option>
-                    <option value="Japan">Japan</option>
-                    <option value="Netherlands">Netherlands</option>
-                    <option value="New Zealand">New Zealand</option>
-                    <option value="Poland">Poland</option>
-                    <option value="Russia">Russia</option>
-                    <option value="Singapore">Singapore</option>
-                    <option value="Spain">Spain</option>
-                    <option value="Sweden">Sweden</option>
-                    <option value="Switzerland">Switzerland</option>
-                    <option value="Ukraine">Ukraine</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value= "United States of America">United States</option>
-                </select>
-                <label for="search_input">
-                    <input id="search_input" type="text" name="productName" size="25" placeholder="Leave blank for all products">
-                    <input class="btn btn-success-outline btn-sm" type="submit" value="Submit"><input class="btn btn-warning-outline btn-sm" type="reset" value="Reset">
-                </label>
-            </form>
-        </div>
+            <div style="text-align:center">
+                <h1><span class="title">Search for the Aircrafts you want to buy or filter by Category:</span></h1>
+            </div>
+            <div style="text-align:center">
+                <form class="search" method="get" action="listprod.jsp">
+                    <select name="category" id="category">
+                        <option value="">All</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Canada">Canada</option>
+                        <option value="China">China</option>
+                        <option value="Czech Republic">Czech Republic</option>
+                        <option value="European consortium">European consortium</option>
+                        <option value="France">France</option>
+                        <option value="Germany">Germany</option>
+                        <option value="India">India</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value= "United States of America">United States</option>
+                    </select>
+                    <label for="search_input">
+                        <input id="search_input" type="text" name="productName" size="25" placeholder="Leave blank for all products">
+                        <input class="btn btn-success-outline btn-sm" type="submit" value="Submit"><input class="btn btn-warning-outline btn-sm" type="reset" value="Reset">
+                    </label>
+                </form>
+            </div>
 <% // Get product name to search for
 String name = request.getParameter("productName");
 String cat = request.getParameter("category");
